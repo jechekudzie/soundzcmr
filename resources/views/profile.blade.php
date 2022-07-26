@@ -9,7 +9,7 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb__item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb__item"><a href="{{url('/dashboard')}}">Home</a></li>
                         <li class="breadcrumb__item breadcrumb__item--active">Profile</li>
                     </ul>
                 </div>
@@ -27,8 +27,7 @@
             <div class="row row--grid">
                 <div class="col-12">
                     @if (session('message'))
-                        <div
-                            style="color: red" class="alert alert-success alert-rounded col-md-6"><i
+                        <div style="color: #FAB516;" class="alert alert-success alert-rounded col-md-6"><i
                                 class="fa fa-check-circle"></i> {{ session('message') }}
                             <button type="button" class="close" data-dismiss="alert"
                                     aria-label="Close"><span
@@ -113,8 +112,8 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="username">Login</label>
-                                                    <input id="username" type="text" name="username"
+                                                    <label class="sign__label" for="username">Name</label>
+                                                    <input id="username" type="text" name="name"
                                                            value="{{$user->name}}" class="sign__input">
                                                 </div>
                                             </div>
@@ -130,15 +129,6 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="firstname">Role</label>
-                                                    <input id="firstname" type="text" name="firstname" value="customer"
-                                                           class="sign__input"
-                                                           placeholder="John">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="sign__group">
                                                     <label class="sign__label" for="lastname">Phone Number</label>
                                                     <input id="lastname" type="text" name="phone_number"
                                                            value="{{$user->phone_number}}" class="sign__input"
@@ -149,7 +139,7 @@
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
                                                     <label class="sign__label" for="select">Choose Role</label>
-                                                    <select name="select" id="select" class="sign__select">
+                                                    <select name="role_id" id="select" class="sign__select">
                                                         <option value="0">Option</option>
                                                         @foreach($roles as $role)
                                                             <option value="{{$role->id}}">{{$role->name}}</option>

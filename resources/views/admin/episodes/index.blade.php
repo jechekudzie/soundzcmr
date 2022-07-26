@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{$event->title}}</h5>
-                                    <p class="card-text">{{$event->description}}</p>
+                                    <p class="card-text">{!! $event->description!!}</p>
                                 </div>
                             </div>
                             <hr/>

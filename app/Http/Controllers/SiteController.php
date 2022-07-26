@@ -33,18 +33,30 @@ class SiteController extends Controller
         $plans = Package::all();
         $roles = Role::whereIn('id', [2, 3])->get();
 
-        $current_plan = Subscription::where('user_id',$user->id)->where('is_active',1)->first();
+        $current_plan = Subscription::where('user_id', $user->id)->where('is_active', 1)->first();
 
-        return view('profile', compact('plans', 'user', 'roles','current_plan'));
+        return view('profile', compact('plans', 'user', 'roles', 'current_plan'));
 
 
     }
 
     public function update_role()
     {
-
         return view('update_role');
+    }
 
+    public function events()
+    {
+        $events = Event::all();
+        return view('events', compact('events'));
 
     }
+
+    public function event(Event $event)
+    {
+        return view('event_details', compact('event'));
+
+    }
+
+
 }

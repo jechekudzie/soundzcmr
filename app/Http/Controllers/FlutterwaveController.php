@@ -27,8 +27,8 @@ class FlutterwaveController extends Controller
 
         if ($package->id == 1) {
 
-
             $this->has_active_subscriptions($user);
+
             Subscription::create([
                 'user_id' => Auth::user()->id,
                 'package_id' => $package->id,
@@ -42,8 +42,8 @@ class FlutterwaveController extends Controller
                 'is_subscribed' => 1
             ]);
 
-
             return redirect('/profile')->with('message', 'You have successfully subscribed to our Free Plan, not that this will attract Ads and limited content view');
+
         } else {
             return view('subscription.checkout', compact('user', 'package'));
         }
@@ -71,7 +71,7 @@ class FlutterwaveController extends Controller
 
         // Enter the details of the payment
         $data = [
-            'payment_options' => 'card,banktransfer,mobilemoneyfranco,banktransfer',
+            'payment_options' => 'card,banktransfer,mobilemoneyfranco',
             'amount' => $info['package_price'],
             'email' => $info['email'],
             'tx_ref' => $reference,
@@ -95,9 +95,7 @@ class FlutterwaveController extends Controller
             'package_id' => $package->id,
             'package_price' => $package->price,
             'reference' => $reference,
-
         ]);
-
 
         $payment = Rave::initializePayment($data);
 
@@ -176,13 +174,20 @@ class FlutterwaveController extends Controller
 
     public function has_active_subscriptions($user)
     {
+
         $subscriptions = Subscription::where('user_id', $user->id)->get();
-        $has_active_subscription = $subscriptions->last();
-        if ($has_active_subscription->is_active == 1) {
-            $has_active_subscription->update([
-                'is_active' => 0
-            ]);
+        if ($subscriptions->count() > 0) {
+            $has_active_subscription = $subscriptions->last();
+            if ($has_active_subscription->is_active == 1) {
+                $has_active_subscription->update([
+                    'is_active' => 0
+                ]);
+            }
+            return;
+        } else {
+            return;
         }
+
     }
 
 }

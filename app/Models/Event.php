@@ -41,8 +41,18 @@ class Event extends Model
         return $this->belongsTo(TicketType::class);
     }
 
+    public function event_participants()
+    {
+        return $this->hasMany(EventParticipant::class);
+    }
+
     public function add_episode($episode)
     {
         return $this->episodes()->create($episode);
+    }
+
+    public function add_event_participants($participant)
+    {
+        return $this->event_participants()->create($participant);
     }
 }

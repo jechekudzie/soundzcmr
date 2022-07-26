@@ -20,7 +20,6 @@ Route::get('/', function () {
 });
 
 
-
 Route::get('/check', 'AdminController@index');
 Route::get('/logs', 'LoginController@logs');
 
@@ -55,8 +54,12 @@ Route::get('/login/{provider}', 'LoginController@redirectToProvider');
 Route::get('/login/{provider}/callback', 'LoginController@handleProviderCallback');
 
 
-Route::get('/dashboard', 'SiteController@index');
-Route::get('/update_role', 'SiteController@update_role');
+Route::get('/dashboard', 'SiteController@index')->middleware('auth');
+Route::get('/update_role', 'SiteController@update_role')->middleware('auth');
 Route::get('/profile', 'SiteController@profile')->middleware('auth');
+
+
+Route::get('/events', 'SiteController@events')->middleware('auth');
+Route::get('/events/{event}', 'SiteController@event')->middleware('auth');
 
 require __DIR__ . '/auth.php';

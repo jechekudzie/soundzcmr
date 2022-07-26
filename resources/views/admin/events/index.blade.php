@@ -60,9 +60,9 @@
                                                 @endif
                                             <div class="card-body">
                                                 <h5 class="card-title">{{$event->title}}</h5>
-                                                <p class="card-text mb-3">{{$event->description}}</p>
+                                                <p class="card-text mb-3">{!! substr($event->description,0,100) !!}</p>
                                                 <a href="{{url('/admin/'.$event->id.'/episodes')}}"
-                                                   class="btn btn-primary">View</a>
+                                                   class="btn btn-primary">View Event Details</a>
                                             </div>
                                         </div>
 
