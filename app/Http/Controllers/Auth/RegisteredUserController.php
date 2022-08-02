@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if ($user->hasVerifiedEmail()) {
-            return redirect('dashboard');
+            return redirect('update_role');
         } else {
             $request->user()->sendEmailVerificationNotification();
             return redirect('verify-email');

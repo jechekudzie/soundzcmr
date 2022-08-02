@@ -17,8 +17,8 @@ class FlutterwaveController extends Controller
     {
 
         $user = Auth::user();
-        $plans = Package::all();
-        return view('subscription.select_plan', compact('user', 'plans'));
+        $plans = Package::whereNotIn('id', [1])->get();
+        return view('subscription.choose_plan', compact('user', 'plans'));
     }
 
     public function checkout(Package $package)
@@ -45,7 +45,7 @@ class FlutterwaveController extends Controller
             return redirect('/profile')->with('message', 'You have successfully subscribed to our Free Plan, not that this will attract Ads and limited content view');
 
         } else {
-            return view('subscription.checkout', compact('user', 'package'));
+            return view('subscription.check', compact('user', 'package'));
         }
 
 
@@ -75,7 +75,7 @@ class FlutterwaveController extends Controller
             'amount' => $info['package_price'],
             'email' => $info['email'],
             'tx_ref' => $reference,
-            'currency' => "NGN",
+            'currency' => "XAF",
             'redirect_url' => route('callback'),
             'customer' => [
                 'email' => $info['email'],
@@ -170,7 +170,6 @@ class FlutterwaveController extends Controller
         // You can also redirect to your success page from here
 
     }
-
 
     public function has_active_subscriptions($user)
     {

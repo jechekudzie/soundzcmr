@@ -299,7 +299,7 @@
                                     <div class="col-12 col-md-6 col-lg-4 order-md-2 order-lg-1">
                                         <div class="plan plan--white">
                                             <h3 class="plan__title">{{$plan->name}}</h3>
-                                            <span class="plan__price">${{$plan->price}}<span> /{{$plan->duration}} month(s)</span></span>
+                                            <span class="plan__price">CHF{{$plan->price}}<span> /{{$plan->duration}} month(s)</span></span>
 
                                             <a href="{{url('/checkout/'.$plan->id)}}" class="plan__btn" type="button">Select
                                                 plan</a>

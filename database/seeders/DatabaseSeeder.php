@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             NationalitiesTableSeeder::class,
             GendersTableSeeder::class,
             TitlesTableSeeder::class,
-            RolesTableSeeder::class,
             EventTypesTableSeeder::class,
             StreamingPlatformsTableSeeder::class,
             PackagesTableSeeder::class,

@@ -15,4 +15,15 @@ class Episode extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function episode_participants()
+    {
+        return $this->hasMany(EpisodeParticipant::class);
+    }
+
+    public function episode_ratings()
+    {
+        return $this->hasMany(EpisodeRating::class);
+    }
+
 }

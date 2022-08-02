@@ -10,7 +10,7 @@
         <div class="page-content">
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <div>
-                    <h4 class="mb-3 mb-md-0">Items</h4>
+                    <h4 class="mb-3 mb-md-0">Event Episodes</h4>
 
                 </div>
                 <div class="d-flex align-items-center flex-wrap text-nowrap">
@@ -32,6 +32,11 @@
                         <i class="btn-icon-prepend" data-feather="plus"></i>
                         Add Episode
                     </button>
+
+                    <a href="{{url('/admin/'.$event->id.'/contestant')}}" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
+                        <i class="btn-icon-prepend" data-feather="plus"></i>
+                        Add Contestant
+                    </a>
 
                     <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0"
                             data-bs-toggle="modal" data-bs-target="#delete">
@@ -79,6 +84,8 @@
                                                     title="{{asset($episode->title)}}" frameborder="0"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowfullscreen></iframe>
+                                            <hr/>
+                                            <a class="btn btn-primary" href="{{url('/admin/'.$episode->id.'/contestants')}}">Contestants</a>
                                         </div>
                                     @endforeach
                                 @endif
@@ -108,6 +115,10 @@
 
                                         <div class="row">
 
+                                            <div class="col-md-6 mb-3">
+                                                <label for="colFormLabel" class="form-label">Episode number</label>
+                                                <input name="episode_number" type="text" class="form-control" id="colFormLabel">
+                                            </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="colFormLabel" class="form-label">Youtube Url</label>
                                                 <input name="link" type="text" class="form-control" id="colFormLabel">
@@ -216,6 +227,10 @@
                     </div>
                 </div>
             </div>
+
+
+
+
         </div>
 
     </div>

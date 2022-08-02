@@ -52,7 +52,7 @@
     <div class="header__content">
         <div class="header__logo">
             <a href="{{url('/')}}">
-                <img style="width: 100%;" src="{{asset('website/soundz logos-02 (1).png')}}" alt="">
+                <img style="width: 400px;" src="{{asset('website/soundz logos-11.png')}}" alt="">
             </a>
         </div>
 
@@ -92,7 +92,7 @@
 <div class="sidebar">
     <!-- sidebar logo -->
     <div  class="sidebar__logo">
-        <img style="width: 100px;" src="{{asset('website/soundz logos-02 (1).png')}}" alt="">
+        <img  style="width: 400px;"  src="{{asset('website/soundz logos-11.png')}}" alt="">
     </div>
     <!-- end sidebar logo -->
 
@@ -207,7 +207,7 @@
         <div class="row">
             <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 order-4 order-md-1 order-lg-4 order-xl-1">
                 <div  class="footer__logo">
-                    <img src="{{asset('website/soundz logos-02 (1).png')}}" alt="">
+                    <img src="{{asset('website/soundz logos-13.png')}}" alt="">
                 </div>
                 <p class="footer__tagline"><br>.</p>
                 <div class="footer__links">

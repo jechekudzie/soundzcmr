@@ -29,19 +29,18 @@ class ArtistsController extends Controller
 
         if (request()->hasfile('image')) {
 
-            $image_file = request()->file('image');
+            $file = request()->file('image');
 
             //get file original name
-            $image_name = $image_file->getClientOriginalName();
+            $name = $file->getClientOriginalName();
 
             //create a unique file name using the time variable plus the name
-            $image_name = time() . $image_name;
+            $file_name = time() . $name;
 
             //upload the file to a directory in Public folder
-            $image = $image_file->move('artists', $image_name);
+            $path = $file->move('artists_images', $file_name);
 
-            $artist['image'] = $image;
-
+            $artist['image'] = $path;
         }
 
         Artist::create($artist);

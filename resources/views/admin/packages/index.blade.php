@@ -50,7 +50,7 @@
                                                     <h4 class="text-center mt-3 mb-4">{{$package->name}}</h4>
                                                     <i data-feather="award"
                                                        class="text-primary icon-xxl d-block mx-auto my-3"></i>
-                                                    <h1 class="text-center">${{$package->price}}</h1>
+                                                    <h1 class="text-center">FCFA{{$package->price}}</h1>
                                                     <p class="text-muted text-center mb-4 fw-light">per
                                                         {{$package->duration}} month(s)</p>
                                                     <h5 class="text-primary text-center

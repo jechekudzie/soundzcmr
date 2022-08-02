@@ -59,7 +59,7 @@
                                         <tr>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->name}}</td>
-                                            <td>{{$user->role->name}}</td>
+                                            <td>@if($user->roles()){{$user->roles->first()->name}}@endif</td>
                                             <td>{{$user->phone_number}}</td>
                                             <td>{{$user->address}}</td>
                                             <td>

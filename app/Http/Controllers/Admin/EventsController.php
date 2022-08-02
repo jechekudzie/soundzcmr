@@ -14,7 +14,7 @@ class EventsController extends Controller
     public function index()
     {
         //
-        $events = Event::all();
+        $events = Event::paginate(2);;
         $event_types = EventType::all();
         $ticket_types = TicketType::all();
 

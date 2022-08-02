@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('event_id');
             $table->string('link');
+            $table->string('episode_number')->nullable();
+            $table->boolean('is_voting_open')->default(1);
             $table->timestamps();
         });
     }

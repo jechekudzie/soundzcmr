@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         KingFlamez\Rave\RaveServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Rave' => KingFlamez\Rave\Facades\Rave::class,
+        'Location' => 'Stevebauman\Location\Facades\Location',
 
     ],
 

@@ -1,206 +1,104 @@
-@extends('layouts.website')
+@extends('layouts.site')
 
 @section('content')
-    <!-- main content -->
-    <main class="main">
-        <div class="container-fluid">
-            <!-- slider -->
-            <section class="row">
-                <div class="col-12">
-                    <div class="hero owl-carousel" id="hero">
-                        <div class="hero__slide" data-bg="{{asset('website/banner.jpg')}}">
-                            <h1 class="hero__title"></h1>
-                            <p class="hero__text">
-                            </p>
-                            {{--<div class="hero__btns">
-                                <a href="#" class="hero__btn hero__btn--green">Buy now</a>
-                                <a href="#" class="hero__btn">Learn more</a>
-                            </div>--}}
+    <main style="margin-top: -50px">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true"
+                        aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="bd-placeholder-img" width="100%" height="100%" src="{{asset('/website/banner1.png')}}"
+                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1>Example headline.</h1>
+                            {{--<p>Some representative placeholder content for the first slide of the carousel.</p>--}}
+                            <p><a class="btn btn-lg btn-danger" href="{{url('/events')}}">View All Events</a>
+
                         </div>
-
-                        <div class="hero__slide" data-bg="{{asset('website/banner1.jpg')}}">
-                            <h2 class="hero__title"></h2>
-                            <p class="hero__text"></p>
-                            {{--<div class="hero__btns">
-                                <a href="#" class="hero__btn hero__btn--green">Learn more</a>
-                                <a href="http://www.youtube.com/watch?v=0O2aH4XLbto"
-                                   class="hero__btn hero__btn--video open-video">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M16,10.27,11,7.38A2,2,0,0,0,8,9.11v5.78a2,2,0,0,0,1,1.73,2,2,0,0,0,2,0l5-2.89a2,2,0,0,0,0-3.46ZM15,12l-5,2.89V9.11L15,12ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>
-                                    </svg>
-                                    Watch video</a>
-                            </div>--}}
-                        </div>
-
-
-                    </div>
-
-                    <button class="main__nav main__nav--hero main__nav--prev" data-nav="#hero" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M17,11H9.41l3.3-3.29a1,1,0,1,0-1.42-1.42l-5,5a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L9.41,13H17a1,1,0,0,0,0-2Z"/>
-                        </svg>
-                    </button>
-                    <button class="main__nav main__nav--hero main__nav--next" data-nav="#hero" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/>
-                        </svg>
-                    </button>
-                </div>
-            </section>
-            <!-- end slider -->
-
-            <!-- events -->
-            <section class="row row--grid">
-                <section class="row row--grid">
-                    <!-- title -->
-                    <div class="col-12">
-                        <div class="main__title">
-                            <h2>Upcoming events</h2>
-                            <a href="#" class="main__link">See all
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- end title -->
-
-                    <div class="col-12">
-                        <div class="main__carousel-wrap">
-                            <div class="main__carousel main__carousel--events owl-carousel" id="events">
-                                @foreach($events as $event)
-                                    @if($event->episodes)
-                                        <div class="event" data-bg="">
-                                            @if($event->episodes->count()>=1)
-                                                <iframe style="width: 100%;"
-                                                        src="https://www.youtube.com/embed/{{substr($event->episodes->first()->link,17)}}?controls=showinfo=0&amp;showinfo=0"
-                                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
-                                                        allowfullscreen>
-                                                </iframe>
-                                            @else
-                                                <iframe style="width: 100%;"
-                                                        src="https://www.youtube.com/embed/"
-                                                        frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                        allowfullscreen>
-                                                </iframe>
-                                            @endif
-                                            <span class="event__date">
-                                                    <a href="{{url('/events/'.$event->id)}}">{{date('d F Y'),strtotime($event->date)}}</a></span>
-                                            {{-- <span class="event__time">8:00 pm</span>--}}
-                                            <h3 class="event__title"><a
-                                                    href="{{url('/events/'.$event->id)}}">{{$event->title}}</a></h3>
-                                            <p class="event__address">{{$event->location}}</p>
-                                        </div>
-                                    @endif
-                                @endforeach
-
-                            </div>
-
-                            <button class="main__nav main__nav--prev" data-nav="#events" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M17,11H9.41l3.3-3.29a1,1,0,1,0-1.42-1.42l-5,5a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L9.41,13H17a1,1,0,0,0,0-2Z"/>
-                                </svg>
-                            </button>
-                            <button class="main__nav main__nav--next" data-nav="#events" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-            </section>
-            <!-- end events -->
-
-            <!-- articts -->
-            <section class="row row--grid">
-                <!-- title -->
-                <div class="col-12">
-                    <div class="main__title">
-                        <h2>Artists</h2>
-                        <a href="#" class="main__link">See all
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/>
-                            </svg>
-                        </a>
                     </div>
                 </div>
-                <!-- end title -->
+                <div class="carousel-item">
+                    <img class="bd-placeholder-img" width="100%" height="100%" src="{{asset('/website/banner3.png')}}"
+                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
 
-                <div class="col-12">
-                    <div class="main__carousel-wrap">
-                        <div class="main__carousel main__carousel--artists owl-carousel" id="artists">
-                            <a href="#" class="artist">
-                                <div class="artist__cover">
-                                    <img src="{{asset('website/artist/artist.png')}}" alt="">
-                                </div>
-                                {{--<h3 class="artist__title">Christ Brown</h3>--}}
-                            </a>
-
-                            <a href="#" class="artist">
-                                <div class="artist__cover">
-                                    <img src="{{asset('website/artist/artist1.png')}}" alt="">
-                                </div>
-                                {{--<h3 class="artist__title">Christ Brown</h3>--}}
-                            </a>
-
-                            <a href="#" class="artist">
-                                <div class="artist__cover">
-                                    <img src="{{asset('website/artist/artist2.png')}}" alt="">
-                                </div>
-                                {{--<h3 class="artist__title">Christ Brown</h3>--}}
-                            </a>
-
-                            <a href="#" class="artist">
-                                <div class="artist__cover">
-                                    <img src="{{asset('website/artist/artist3.png')}}" alt="">
-                                </div>
-                                {{--<h3 class="artist__title">Christ Brown</h3>--}}
-                            </a>
-
-                            <a href="#" class="artist">
-                                <div class="artist__cover">
-                                    <img src="{{asset('website/artist/artist4.png')}}" alt="">
-                                </div>
-                                {{--<h3 class="artist__title">Christ Brown</h3>--}}
-                            </a>
-
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Another example headline.</h1>
+                           {{-- <p>Some representative placeholder content for the second slide of the carousel.</p>--}}
+                            <p><a class="btn btn-lg btn-danger" href="{{url('/events')}}">View All Events</a>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <button class="main__nav main__nav--prev" data-nav="#artists" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M17,11H9.41l3.3-3.29a1,1,0,1,0-1.42-1.42l-5,5a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L9.41,13H17a1,1,0,0,0,0-2Z"/>
-                            </svg>
-                        </button>
-                        <button class="main__nav main__nav--next" data-nav="#artists" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/>
-                            </svg>
-                        </button>
                     </div>
                 </div>
-            </section>
-            <!-- end articts -->
+                <div class="carousel-item">
+                    <img class="bd-placeholder-img" width="100%" height="100%" src="{{asset('/website/banner4.png')}}"
+                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
 
-
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1>One more for good measure.</h1>
+                            <p><a class="btn btn-lg btn-danger" href="{{url('/events')}}">View All Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-    </main>
-    <!-- end main content -->
 
-    <script type="text/javascript">
-        document.getElementsByClassName("ytp-button ytp-share-button ytp-share-button-visible ytp-show-share-title")[0].style.display = 'none'
-    </script>
+        <section style="margin-top: 5rem;" class="text-center container">
+            <div class="row">
+                @foreach($events as $event)
+                    <div class="col-md-4 col-lg-4">
+
+                        <div class="card text-bg-dark">
+                            @if($event->episodes)
+                                @if($event->episodes->count()>=1)
+                                    <iframe class="card-img" style="width: 100%; height: 300px"
+                                            src="https://www.youtube.com/embed/{{substr($event->episodes->first()->link,17)}}"
+                                            title="{{asset($event->title)}}" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                @endif
+                            @else
+                                <iframe class="card-img" style="width: 100%; height: 300px"
+                                        src="https://www.youtube.com/embed/"
+                                        title="{{asset($event->title)}}" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            @endif
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$event->title}}</h5>
+                                    <p style="text-align: justify" class="card-text">{!! substr($event->description,0,70) !!}....</p>
+                                </div>
+                                <div class="" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="toast-header">
+                                        <strong class="me-auto">{{$event->location}}</strong>
+                                        <small>{{date('d F Y',strtotime($event->date))}}</small>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="toast-body">
+                                        <a href="{{url('/events/'.$event->id)}}" class="btn btn-primary btn-block">Event Details</a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                @endforeach
+            </div>
+        </section>
+    </main>
+
 @stop

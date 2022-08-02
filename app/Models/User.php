@@ -7,19 +7,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function episode_rating()
+    {
+        return $this->belongsTo(EpisodeRating::class);
+    }
+
+    public function episode_participant_vote()
+    {
+        return $this->belongsTo(EpisodeParticipantVote::class);
+    }
+
+    public function episode_participant_like()
+    {
+        return $this->belongsTo(EpisodeParticipantLike::class);
     }
     /**
      * The attributes that are mass assignable.

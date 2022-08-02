@@ -42,32 +42,81 @@
                                 @endif
                                 <div class="row">
                                     @foreach($events as $event)
-                                        <div class="col-md-4 card">
-                                            @if($event->episodes)
-                                                @if($event->episodes->count()>=1)
-                                            <iframe style="width: 100%; height: 300px"
-                                                    src="https://www.youtube.com/embed/{{substr($event->episodes->first()->link,17)}}"
-                                                    title="{{asset($event->title)}}" frameborder="0"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowfullscreen></iframe>
-                                                @endif
-                                            @else
-                                                <iframe style="width: 100%; height: 300px"
-                                                        src="https://www.youtube.com/embed/"
-                                                        title="{{asset($event->title)}}" frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                        allowfullscreen></iframe>
-                                                @endif
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{$event->title}}</h5>
-                                                <p class="card-text mb-3">{!! substr($event->description,0,100) !!}</p>
-                                                <a href="{{url('/admin/'.$event->id.'/episodes')}}"
-                                                   class="btn btn-primary">View Event Details</a>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="card rounded">
+                                                <div class="card-header">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="ms-2">
+                                                                <p style="font-weight: bold;font-size: 20px;">{{$event->title}}</p>
+                                                                <p class="tx-11 text-muted">{{date('d F M',strtotime($event->date))}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dropdown">
+                                                            <button class="btn p-0" type="button"
+                                                                    id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false">Episodes:
+                                                                <i class="icon-lg pb-3px" data-feather="more-horizontal"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu"
+                                                                 aria-labelledby="dropdownMenuButton2">
+                                                                @if($event->episodes)
+                                                                    @foreach($event->episodes as $episode)
+                                                                        <a class="dropdown-item d-flex align-items-center"
+                                                                           href="{{url('/admin/'.$episode->id.'/contestants')}}"><i
+                                                                                data-feather="meh"
+                                                                                class="icon-sm me-2"></i>
+                                                                            <span class="">Episode: {{$episode->episode_number}}</span></a>
+                                                                    @endforeach
+                                                                @endif
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-3 tx-14">{!! substr($event->description,0,50) !!}</p>
+                                                    .....
+                                                    @if($event->episodes)
+                                                        @if($event->episodes->count()>=1)
+                                                            <iframe style="width: 100%; height: 300px"
+                                                                    src="https://www.youtube.com/embed/{{substr($event->episodes->first()->link,17)}}"
+                                                                    title="{{asset($event->title)}}" frameborder="0"
+                                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                    allowfullscreen></iframe>
+                                                        @endif
+                                                    @else
+                                                        <iframe style="width: 100%; height: 300px"
+                                                                src="https://www.youtube.com/embed/"
+                                                                title="{{asset($event->title)}}" frameborder="0"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen></iframe>
+                                                    @endif
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="d-flex post-actions">
+                                                        <a href="javascript:;"
+                                                           class="d-flex align-items-center text-muted me-4">
+                                                            <i class="icon-md" data-feather="heart"></i>
+                                                            <p class="d-none d-md-block ms-2">Like</p>
+                                                        </a>
+                                                        <a href="javascript:;"
+                                                           class="d-flex align-items-center text-muted me-4">
+                                                            <i class="icon-md" data-feather="message-square"></i>
+                                                            <p class="d-none d-md-block ms-2">Comment</p>
+                                                        </a>
+                                                        <a href="{{url('/admin/events/'.$event->id)}}"
+                                                           class="d-flex align-items-center text-muted">
+                                                            <i class="icon-md" data-feather="eye"></i>
+                                                            <p class="d-none d-md-block ms-2">View</p>
+                                                        </a>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                     @endforeach
-
                                 </div>
 
                             </div>
@@ -176,13 +225,13 @@
 
     <script type="text/javascript">
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script src="{{asset('backend/vendors/prismjs/prism.js')}}"></script>
@@ -194,11 +243,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $( "#datepicker" ).datepicker({
+        $(function () {
+            $("#datepicker").datepicker({
                 dateFormat: "yy-mm-dd"
             });
-        } );
+        });
     </script>
 
 @endpush

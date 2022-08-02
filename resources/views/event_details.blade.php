@@ -101,6 +101,8 @@
                                                     title="{{asset($episode->title)}}" frameborder="0"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowfullscreen></iframe>
+                                            <hr/>
+                                            <a class="sign__btn" href="{{url('/episode_details/'.$episode->id)}}">Episode details</a>
                                         </div>
                                     @endforeach
                                 @endif

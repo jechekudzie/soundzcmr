@@ -55,7 +55,7 @@
 
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">User role:</label>
-                                    <p class="text-muted">{{$user->role->name}}</p>
+                                    <p class="text-muted">@if($user->roles()){{$user->roles->first()->name}}@endif</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">Registration:</label>

@@ -61,7 +61,7 @@
                                         @if($user->subscriptions->count() > 0)
                                                 <tr>
                                                     <td>{{$user->subscriptions->last()->user->email}} </td>
-                                                    <td>{{$user->subscriptions->last()->user->role->name}} </td>
+                                                    <td>@if($user->roles()){{$user->roles->first()->name}}@endif </td>
                                                     <td>{{$user->subscriptions->last()->package->name}}</td>
                                                     <td> {{$user->subscriptions->last()->package_price}}</td>
                                                     <td>
