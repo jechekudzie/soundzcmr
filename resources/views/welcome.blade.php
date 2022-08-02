@@ -98,6 +98,8 @@
 
                 @endforeach
             </div>
+            <br/>
+            <hr/>
         </section>
     </main>
 

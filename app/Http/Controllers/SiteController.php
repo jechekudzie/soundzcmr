@@ -19,13 +19,9 @@ class SiteController extends Controller
     public function index(Request $request)
     {
 
-        //$clientIP = \Request::getClientIp();
+        $ip = \Request::getClientIp();
         $user = Auth::user();
-        //$ip = '28.120.425';//Zimbabwe IP
-        //$ip = '102.130.49.0';//South africa IP
-        $ip = '102.132.31.255';//cameroon IP
         $currentUserInfo = Location::get($ip);
-        //dd($currentUserInfo);
 
         $events = Event::latest()->take(6)->get();
         $package = Package::find(1);
@@ -86,7 +82,7 @@ class SiteController extends Controller
 
         $user->assignRole($user_role);
 
-        return redirect('dashboard')->with('message','You account type has been updated, Please choose your subscription message.');
+        return redirect('dashboard')->with('message', 'You account type has been updated, Please choose your subscription message.');
     }
 
     public function events()

@@ -75,7 +75,7 @@ class FlutterwaveController extends Controller
             'amount' => $info['package_price'],
             'email' => $info['email'],
             'tx_ref' => $reference,
-            'currency' => "NGN",//XAF
+            'currency' => "XAF",//XAF
             'redirect_url' => route('callback'),
             'customer' => [
                 'email' => $info['email'],
@@ -112,6 +112,7 @@ class FlutterwaveController extends Controller
         $user = Auth::user();
 
         $status = request()->status;
+        $tx_ref = request()->tx_ref;
 
         //if payment is successful
         if ($status == 'successful') {
@@ -148,11 +149,10 @@ class FlutterwaveController extends Controller
 
 
         } elseif ($status == 'cancelled') {
-            $transactionID = Rave::getTransactionIDFromCallback();
-            $response = Rave::verifyTransaction($transactionID);
-            $subscription = Subscription::where('reference', $response['data']['tx_ref'])->first();
+
+            $subscription = Subscription::where('reference', $tx_ref)->first();
             $subscription->update([
-                'status' => $response['status'],
+                'status' => $status,
             ]);
             return redirect('/profile')->with('message', 'Your payment was canceled.');
         } else {
