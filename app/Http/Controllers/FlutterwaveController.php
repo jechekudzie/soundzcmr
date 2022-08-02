@@ -75,7 +75,7 @@ class FlutterwaveController extends Controller
             'amount' => $info['package_price'],
             'email' => $info['email'],
             'tx_ref' => $reference,
-            'currency' => "XAF",
+            'currency' => "NGN",//XAF
             'redirect_url' => route('callback'),
             'customer' => [
                 'email' => $info['email'],
