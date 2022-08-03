@@ -7,6 +7,7 @@
     <meta name="author" content="iTAP Media">
     <meta name="generator" content="Hugo 0.88.1">
     <title>SOUNDZcmr</title>
+    <link rel="shortcut icon" style="width: 200px;" href="{{asset('mail.png')}}">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -54,7 +55,7 @@
     <nav class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation">
         <a href="{{url('/dashboard')}}"
            class="d-flex align-items-center {{--mb-2--}} mb-lg-0 text-dark text-decoration-none">
-            <img src="{{asset('/site/brand/logo1.png')}}" class="bi me-2" width="400" height="" role="img"
+            <img src="{{asset('')}}" class="bi me-2" width="400" height="" role="img"
                  aria-label="Bootstrap">
             {{--<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>--}}
         </a>

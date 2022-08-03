@@ -9,7 +9,7 @@
     <meta name="keywords" content=""/>
     <meta name="author" content="Themesdesign"/>
 
-    <link rel="shortcut icon" href="{{asset('registration/images/favicon.ico')}}">
+    <link rel="shortcut icon" style="width: 200px;" href="{{asset('mail.png')}}">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{asset('registration/css/bootstrap.min.css')}}" type="text/css">
