@@ -37,11 +37,11 @@
                             </div>
                             <div class="card-body">
                                 <h1 class="card-title pricing-card-title">FCFA {{$plan->price}}<small
-                                        class="text-muted fw-light">/mo</small>
+                                        class="text-muted fw-light"></small>
                                 </h1>
                                 <ul class="list-unstyled mt-3 mb-4">
-                                    <li>Duration: {{$plan->duration}} month(s)</li>
-                                    <li>Duration: {{$plan->duration_days}} month(s)</li>
+                                    <li>Duration {{$plan->duration}} month(s)</li>
+                                    <li>Expires in {{$plan->duration_days}} days(s)</li>
                                 </ul>
                                 <a href="{{url('/checkout/'.$plan->id)}}" class="w-100 btn btn-lg btn-primary">Get started</a>
                             </div>

@@ -24,6 +24,33 @@ Route::get('/check', 'AdminController@index');
 Route::get('/logs', 'LoginController@logs');
 
 
+
+//Payments
+Route::get('/select_plan', 'FlutterwaveController@select_plan');
+Route::get('/checkout/{package}', 'FlutterwaveController@checkout');
+Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
+// The callback url after a payment
+Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
+//Webhook for updates
+Route::post('/webhook/flutterwave', [FlutterwaveController::class, 'webhook'])->name('webhook');
+
+
+Route::get('/login/{provider}', 'LoginController@redirectToProvider');
+Route::get('/login/{provider}/callback', 'LoginController@handleProviderCallback');
+
+
+Route::get('/dashboard', 'SiteController@index')->middleware('auth');
+Route::get('/update_role', 'SiteController@update_role')->middleware('auth');
+Route::get('/profile', 'SiteController@profile')->middleware('auth');
+Route::get('/update_role', 'SiteController@update_role')->middleware('auth');
+Route::post('/store_role', 'SiteController@store_role')->middleware('auth');
+
+
+Route::get('/events', 'SiteController@events')->middleware('auth');
+Route::get('/events/{event}', 'SiteController@event')->middleware('auth');
+Route::get('/event_episode/{episode}', 'SiteController@event_episode')->middleware('auth');
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['role:Admin']], function () {
 
@@ -58,31 +85,5 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 });
-
-
-//Payments
-Route::get('/select_plan', 'FlutterwaveController@select_plan');
-Route::get('/checkout/{package}', 'FlutterwaveController@checkout');
-Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
-// The callback url after a payment
-Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
-//Webhook for updates
-Route::post('/webhook/flutterwave', [FlutterwaveController::class, 'webhook'])->name('webhook');
-
-
-Route::get('/login/{provider}', 'LoginController@redirectToProvider');
-Route::get('/login/{provider}/callback', 'LoginController@handleProviderCallback');
-
-
-Route::get('/dashboard', 'SiteController@index')->middleware('auth');
-Route::get('/update_role', 'SiteController@update_role')->middleware('auth');
-Route::get('/profile', 'SiteController@profile')->middleware('auth');
-Route::get('/update_role', 'SiteController@update_role')->middleware('auth');
-Route::post('/store_role', 'SiteController@store_role')->middleware('auth');
-
-
-Route::get('/events', 'SiteController@events')->middleware('auth');
-Route::get('/events/{event}', 'SiteController@event')->middleware('auth');
-Route::get('/event_episode/{episode}', 'SiteController@event_episode')->middleware('auth');
 
 require __DIR__ . '/auth.php';

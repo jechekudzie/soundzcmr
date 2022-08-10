@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="iTAP Media">
-    <meta name="generator" content="Hugo 0.88.1">
+    <meta name="description" content="Welcome to soundzcmr, Cameroon Tatent show and audio streaming service.">
+    <meta name="author" content="SOUNDZCmr">
+    <meta name="generator" content="icream digital">
     <title>SOUNDZcmr</title>
     <link rel="shortcut icon" style="width: 200px;" href="{{asset('mail.png')}}">
 
@@ -55,7 +55,7 @@
     <nav class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation">
         <a href="{{url('/dashboard')}}"
            class="d-flex align-items-center {{--mb-2--}} mb-lg-0 text-dark text-decoration-none">
-            <img src="{{asset('')}}" class="bi me-2" width="400" height="" role="img"
+            <img src="{{asset('/site/brand/logo1.png')}}" class="bi me-2" width="400" height="" role="img"
                  aria-label="Bootstrap">
             {{--<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>--}}
         </a>
@@ -73,9 +73,12 @@
         <div class="navbar-collapse collapse" id="bdNavbar" style="">
             <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 {{-- <li class="nav-item"><a href="#" class="nav-link text-dark active">Home</a></li>--}}
-                <li class="nav-item"><a href="{{url('/events')}}" class="nav-link text-dark active">Events</a>
-                </li>
+                <li class="nav-item"><a href="{{url('/dashboard')}}" class="nav-link text-dark active">Home</a></li>
+                <li class="nav-item"><a href="{{url('/events')}}" class="nav-link text-dark active">Events</a></li>
                 <li class="nav-item"><a href="#" class="nav-link text-dark">Artists</a></li>
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['Admin']))
+                <li class="nav-item"><a href="{{url('/admin')}}" target="_blank" class="nav-link text-dark">Admin Dashboard</a></li>
+                @endif
                 <li style="list-style: none" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">

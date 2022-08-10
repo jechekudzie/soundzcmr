@@ -54,16 +54,16 @@
                     </div>
 
                     <div style="padding: 10px;" class="mt-2 pt-2 border-top">
-                        <a class="btn btn-primary btn-sm" href="">
-                            Like <i class="fas fa-thumbs-up" aria-hidden="true"></i>
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="{{url('/event_episode/'.$episode->id)}}">
-                            Vote <i  class="fas fa-vote-yea" aria-hidden="true"></i>
-                        </a>
 
-                        <a class="btn btn-warning btn-sm" href="{{url('/event_episode/'.$episode->id)}}">
-                            Details <i  class="fas fa-eye" aria-hidden="true"></i>
-                        </a>
+
+{{--
+                        <a class="btn btn-primary me-2" href="{{url('/event_episode/'.$episode->id)}}" target="_blank" role="button">Like <i class="fas fa-thumbs-up"></i></a>
+--}}
+                        <a class="btn btn-danger me-2" href="{{url('/event_episode/'.$episode->id)}}" role="button">Vote <i class="fas fa-vote-yea" aria-hidden="true"></i></a>
+                        <a class="btn btn-success me-2" href="{{url('/event_episode/'.$episode->id)}}" role="button">Details  <i  class="fas fa-eye" aria-hidden="true"></i></a>
+
+
+
                     </div>
                 </div>
 

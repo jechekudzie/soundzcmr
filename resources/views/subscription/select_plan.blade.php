@@ -27,12 +27,21 @@
                 </div>
                 <!-- end title -->
                 @foreach($plans as $plan)
-                    <div class="col-12 col-md-6 col-lg-4 order-md-2 order-lg-1">
-                        <div class="plan plan--white">
-                            <h3 class="plan__title">{{$plan->name}}</h3>
-                            <span class="plan__price">CHF{{$plan->price}}<span> /{{$plan->duration}} month(s)</span></span>
-
-                            <a href="{{url('/checkout/'.$plan->id)}}" class="plan__btn" type="button">Select plan</a>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <h4 class="my-0 fw-normal">{{$plan->name}}</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">FCFA {{$plan->price}}<small
+                                        class="text-muted fw-light"></small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Duration {{$plan->duration}} month(s)</li>
+                                    <li>Expires in {{$plan->duration_days}} days(s)</li>
+                                </ul>
+                                <a href="{{url('/checkout/'.$plan->id)}}" class="w-100 btn btn-lg btn-primary">Get started</a>
+                            </div>
                         </div>
                     </div>
                 @endforeach

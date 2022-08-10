@@ -12,39 +12,42 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="bd-placeholder-img" width="100%" height="100%" src="{{asset('/website/banner1.png')}}"
+                    <img class="bd-placeholder-img" width="100%" height="100%"
+                         src="{{asset('/website/banner1.png')}}"
                          aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
                     <div class="container">
                         <div class="carousel-caption text-start">
-                            <h1>Example headline.</h1>
-                            <p>Some representative placeholder content for the first slide of the carousel.</p>
-                            <p><a class="btn btn-lg btn-danger" href="#">Sign up today</a> <a
-                                    class="btn btn-lg btn-danger" href="#">Sign up today</a></p>
+                            <h1></h1>
 
+                            <a style="margin-top: 15%;" target="_blank" class="btn btn-sm btn-danger"
+                               href="https://soundzcmr.com/en/cameroon-talent-show">View Details</a>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="bd-placeholder-img" width="100%" height="100%" src="{{asset('/website/banner3.png')}}"
+                    <img class="bd-placeholder-img" width="100%" height="100%"
+                         src="{{asset('/website/banner2.png')}}"
                          aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
 
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>Another example headline.</h1>
-                            <p>Some representative placeholder content for the second slide of the carousel.</p>
-                            <p><a class="btn btn-lg btn-danger" href="#">Learn more</a></p>
+                            {{--  <h1>Another example headline.</h1>--}}
+                            {{-- <p>Some representative placeholder content for the second slide of the carousel.</p>--}}
+                            <a style="margin-top: 15%;" target="_blank" class="btn btn-sm btn-danger"
+                               href="https://soundzcmr.com/en/about-us">Learn More</a>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="bd-placeholder-img" width="100%" height="100%" src="{{asset('/website/banner4.png')}}"
+                    <img class="bd-placeholder-img" width="100%" height="100%"
+                         src="{{asset('/website/banner3.png')}}"
                          aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
 
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1>One more for good measure.</h1>
-                            <p>Some representative placeholder content for the third slide of this carousel.</p>
-                            <p><a class="btn btn-lg btn-danger" href="#">Browse gallery</a></p>
+                            {{-- <h1>One more for good measure.</h1>--}}
+                            <a style="margin-top: 15%;" target="_blank" class="btn btn-sm btn-danger"
+                               href="https://soundzcmr.com/en/about-us">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +66,7 @@
             <div class="row">
                 @foreach($events as $event)
 
-                    <div style="padding-bottom: 10px" class="col-md-4 col-lg-4">
+                    <div style="margin-bottom: 20px;" class="col-md-4 col-lg-4">
 
                         <div class="card text-bg-dark">
                             @if($event->episodes)

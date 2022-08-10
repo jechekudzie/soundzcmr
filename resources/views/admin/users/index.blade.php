@@ -44,6 +44,7 @@
                                 <table id="dataTableExample" class="col-g-12 col-md-12 table">
                                     <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>Email</th>
                                         <th>Username</th>
                                         <th>User role</th>
@@ -51,21 +52,28 @@
                                         <th>Address</th>
                                         <th>Subscriptions and Payments</th>
                                         <th>Registration</th>
+                                        <th>Edit</th>
                                         <th>View</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($users as $user)
                                         <tr>
+                                            <td>{{$user->id}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->name}}</td>
-                                            <td>@if($user->roles()){{$user->roles->first()->name}}@endif</td>
+                                            <td>@if($user->roles()){{$user->getRoleNames()->first()}}@endif</td>
                                             <td>{{$user->phone_number}}</td>
                                             <td>{{$user->address}}</td>
                                             <td>
-                                                Subscriptions @if($user->subscriptions)({{$user->subscriptions->count()}})@endif
+                                                Subscriptions @if($user->subscriptions)
+                                                    ({{$user->subscriptions->count()}})@endif
                                             </td>
                                             <td>{{$user->provider}}</td>
+
+                                            <td>
+                                                <a href="{{url('admin/users/'.$user->id.'/edit')}}">Edit</a>
+                                            </td>
                                             <td>
                                                 <a href="{{url('admin/users/'.$user->id)}}">View</a>
                                             </td>
@@ -84,7 +92,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Event type</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Users</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="btn-close"></button>
                         </div>
@@ -97,14 +105,39 @@
 
                                         <div class="mb-3">
                                             <label for="colFormLabel" class="form-label">Name</label>
-                                            <input name="name" type="text" class="form-control" id="colFormLabel">
+                                            <input name="name" type="text" class="form-control" value="{{old('name')}}" id="colFormLabel">
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="colFormLabel" class="form-label">Description</label>
-                                            <textarea name="description" class="form-control"
-                                                      id="colFormLabel"></textarea>
+                                            <label for="colFormLabel" class="form-label">Email</label>
+                                            <input name="email" type="email" class="form-control" value="{{old('email')}}" id="colFormLabel">
                                         </div>
+
+                                        <div class=" col-md-6 mb-3">
+                                            <label for="exampleFormControlSelect1" class="form-label">
+                                                Role</label>
+                                            <select name="user_role" class="form-select"
+                                                    id="exampleFormControlSelect1">
+                                                <option selected disabled>Select User Role</option>
+
+                                                    @foreach($roles as $role)
+                                                        <option
+                                                            value="{{$role->name}}">{{$role->name}}</option>
+                                                    @endforeach
+
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="colFormLabel" class="form-label">Password</label>
+                                            <input name="password" type="password" class="form-control"  id="colFormLabel">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="colFormLabel" class="form-label">Confirm Password</label>
+                                            <input name="password_confirmation" type="password" class="form-control" id="colFormLabel">
+                                        </div>
+
                                     </div>
                                 </div>
 
