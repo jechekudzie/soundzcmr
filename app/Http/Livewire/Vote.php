@@ -17,6 +17,7 @@ class Vote extends Component
 
     public $ep;
     public $epc;
+    public $button = 'btn-success';
 
     //variables for count
     public $vote_count = [];
@@ -36,20 +37,26 @@ class Vote extends Component
                 'user_id' => $user->id,
                 'vote' => 1,
             ]);
-            $this->message = 'New vote cast for ' . $participant->event_participant->name . ' was successful';
+            //$this->message = 'New vote cast for ' . $participant->event_participant->name . ' was successful';
+            $this->message = 'Vote casted';
+            $this->button = 'btn-warning';
         } else {
             if ($this->check_vote->episode_participant_id == $episode_participant && $this->check_vote->vote == 1) {
                 $this->check_vote->update([
                     'vote' => 0,
                 ]);
 
-                $this->message = 'You revoked your vote for ' . $participant->event_participant->name;
+                //$this->message = 'You revoked your vote for ' . $participant->event_participant->name;
+                $this->message = 'Voted revoked';
+                $this->button = 'btn-success';
             } elseif ($this->check_vote->episode_participant_id == $episode_participant && $this->check_vote->vote == 0) {
                 $this->check_vote->update([
                     'vote' => 1,
                 ]);
 
-                $this->message = 'Casted vote for same contestant, ' . $participant->event_participant->name;
+                //$this->message = 'Casted vote for same contestant, ' . $participant->event_participant->name;
+                $this->message = 'Vote casted';
+                $this->button = 'btn-primary';
             } else {
                 $this->check_vote->update([
                     'episode_id' => $episode_id,
@@ -58,7 +65,9 @@ class Vote extends Component
                     'vote' => 1,
                 ]);
 
-                $this->message = 'New vote cast for ' . $participant->event_participant->name . ' was successful';
+                //$this->message = 'New vote cast for ' . $participant->event_participant->name . ' was successful';
+                $this->message = 'Vote casted';
+                $this->button = 'btn-warning';
             }
 
         }

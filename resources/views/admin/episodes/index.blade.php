@@ -80,10 +80,11 @@
                                     @foreach($event->episodes as $episode)
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <iframe style="width: 100%; height: 300px"
-                                                    src="https://www.youtube.com/embed/{{substr($episode->link,17)}}"
-                                                    title="{{asset($episode->title)}}" frameborder="0"
+                                                    src="https://www.youtube.com/embed/{{substr($episode->link,17)}}" title="{{asset($episode->title)}}" frameborder="0"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowfullscreen></iframe>
+                                                    allowfullscreen>
+
+                                            </iframe>
                                             <hr/>
                                             <a class="btn btn-primary" href="{{url('/admin/'.$episode->id.'/contestants')}}">Contestants</a>
                                         </div>

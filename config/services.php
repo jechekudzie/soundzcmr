@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -40,6 +41,9 @@ return [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT_URI')
+    ],
+    'stripe' => [
+        'secret' => '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',
     ],
 
 ];

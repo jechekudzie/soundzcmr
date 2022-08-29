@@ -75,4 +75,26 @@ class UsersController extends Controller
 
     }
 
+    public function destroy(User $user)
+    {
+        $name = $user->name;
+        $email = $user->email;
+        $role = $user->getRoleNames();
+
+        if ($user->subscriptions->count() >= 1) {
+            $user->subscriptions->delete();
+        }
+
+        if ($role != null) {
+
+            $user->syncRoles($role);
+        }
+
+        $user->delete();
+
+        return redirect('/admin/users')->with('message', 'User ' . $name . ' with email ' . $email . '
+        was successfully removed from the system with all his roles and subscriptions.');
+
+    }
+
 }

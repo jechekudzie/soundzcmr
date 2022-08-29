@@ -50,51 +50,67 @@
                                                     <h4 class="text-center mt-3 mb-4">{{$package->name}}</h4>
                                                     <i data-feather="award"
                                                        class="text-primary icon-xxl d-block mx-auto my-3"></i>
-                                                    <h1 class="text-center">FCFA{{$package->price}}</h1>
+                                                    <h1 class="text-center">USD${{$package->price}}</h1>
                                                     <p class="text-muted text-center mb-4 fw-light">per
                                                         {{$package->duration}} month(s)</p>
                                                     <h5 class="text-primary text-center
                                                     mb-4">{{$package->duration_days}} days</h5>
-                                                   {{-- <table class="mx-auto">
-                                                        <tr>
-                                                            <td><i data-feather="check"
-                                                                   class="icon-md text-primary me-2"></i></td>
-                                                            <td><p>Accounting dashboard</p></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i data-feather="check"
-                                                                   class="icon-md text-primary me-2"></i></td>
-                                                            <td><p>Invoicing</p></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i data-feather="check"
-                                                                   class="icon-md text-primary me-2"></i></td>
-                                                            <td><p>Online payments</p></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i data-feather="x"
-                                                                   class="icon-md text-danger me-2"></i>
-                                                            </td>
-                                                            <td><p class="text-muted">Branded website</p></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i data-feather="x"
-                                                                   class="icon-md text-danger me-2"></i>
-                                                            </td>
-                                                            <td><p class="text-muted">Dedicated account manager</p></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i data-feather="x"
-                                                                   class="icon-md text-danger me-2"></i>
-                                                            </td>
-                                                            <td><p class="text-muted">Premium apps</p></td>
-                                                        </tr>
-                                                    </table>--}}
+                                                    {{-- <table class="mx-auto">
+                                                         <tr>
+                                                             <td><i data-feather="check"
+                                                                    class="icon-md text-primary me-2"></i></td>
+                                                             <td><p>Accounting dashboard</p></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <td><i data-feather="check"
+                                                                    class="icon-md text-primary me-2"></i></td>
+                                                             <td><p>Invoicing</p></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <td><i data-feather="check"
+                                                                    class="icon-md text-primary me-2"></i></td>
+                                                             <td><p>Online payments</p></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <td><i data-feather="x"
+                                                                    class="icon-md text-danger me-2"></i>
+                                                             </td>
+                                                             <td><p class="text-muted">Branded website</p></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <td><i data-feather="x"
+                                                                    class="icon-md text-danger me-2"></i>
+                                                             </td>
+                                                             <td><p class="text-muted">Dedicated account manager</p></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <td><i data-feather="x"
+                                                                    class="icon-md text-danger me-2"></i>
+                                                             </td>
+                                                             <td><p class="text-muted">Premium apps</p></td>
+                                                         </tr>
+                                                     </table>--}}
                                                     <div class="d-grid">
                                                         <button class="btn btn-primary mt-4">Start {{$package->name}}
 
                                                         </button>
+
                                                     </div>
+
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-success mt-4" data-bs-toggle="modal"
+                                                                data-bs-target="#package{{$package->id}}">
+                                                            Edit {{$package->name}}</button>
+
+                                                    </div>
+
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-warning mt-4" data-bs-toggle="modal"
+                                                                data-bs-target="#package_delete{{$package->id}}">
+                                                            Delete {{$package->name}}</button>
+
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -144,28 +160,148 @@
                                         </div>
 
                                     </div>
-                                    <div class="list-group">
-                                        @foreach($items as $item)
-                                            <label class="list-group-item">
-                                                <input class="form-check-input me-1" name="items[]" type="checkbox"
-                                                       value="{{$item->id}}">
-                                                {{$item->name}}
-                                            </label>
-                                        @endforeach
+                                    {{-- <div class="list-group">
+                                         @foreach($items as $item)
+                                             <label class="list-group-item">
+                                                 <input class="form-check-input me-1" name="items[]" type="checkbox"
+                                                        value="{{$item->id}}">
+                                                 {{$item->name}}
+                                             </label>
+                                         @endforeach
 
-                                    </div>
+                                     </div>--}}
                                 </div>
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save package</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
+
+            @foreach($packages as $package)
+                <div class="modal fade" id="package{{$package->id}}" tabindex="-1"
+                     aria-labelledby="exampleModalCenterTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">{{$package->name}}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="btn-close"></button>
+                            </div>
+                            <form method="post" enctype="multipart/form-data"
+                                  action="{{url('/admin/packages/'.$package->id)}}">
+                                @method('PATCH')
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Add new </h6>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="colFormLabel" class="form-label">Name</label>
+                                                    <input name="name" type="text" value="{{$package->name}}"
+                                                           class="form-control" id="colFormLabel">
+                                                </div>
+
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="colFormLabel" class="form-label">Price</label>
+                                                    <input name="price" type="number" value="{{$package->price}}"
+                                                           step="any" class="form-control"
+                                                           id="colFormLabel">
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="colFormLabel" class="form-label">Duration in
+                                                        months</label>
+                                                    <input name="duration" type="number" value="{{$package->duration}}"
+                                                           class="form-control"
+                                                           id="colFormLabel">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        {{--<div class="list-group">
+                                            @foreach($items as $item)
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" name="items[]" type="checkbox"
+                                                           value="{{$item->id}}">
+                                                    {{$item->name}}
+                                                </label>
+                                            @endforeach
+
+                                        </div>--}}
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+            @foreach($packages as $package)
+                <div class="modal fade" id="package_delete{{$package->id}}" tabindex="-1"
+                     aria-labelledby="exampleModalCenterTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">{{$package->name}}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="btn-close"></button>
+                            </div>
+                            <form method="post" enctype="multipart/form-data"
+                                  action="{{url('/admin/packages/'.$package->id)}}">
+                                @method('DELETE')
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Delete {{$package->name}} Plan </h6>
+
+                                            <div class="row">
+                                               <p>Are you sure you want tpo delete this package.</p>
+                                            </div>
+
+                                        </div>
+                                        {{--<div class="list-group">
+                                            @foreach($items as $item)
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" name="items[]" type="checkbox"
+                                                           value="{{$item->id}}">
+                                                    {{$item->name}}
+                                                </label>
+                                            @endforeach
+
+                                        </div>--}}
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, return
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Yes Delete</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
     </div>

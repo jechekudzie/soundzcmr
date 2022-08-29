@@ -19,6 +19,7 @@ class LoginController extends Controller
     {
         //check data from facebook, google and apple
         $socialiteUser = Socialite::driver($provider)->user();
+        
 
         //save user into local database, first check if user already exist
         $user = User::where('email', $socialiteUser->getEmail())->first();

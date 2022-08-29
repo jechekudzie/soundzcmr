@@ -6,12 +6,14 @@
         <div class="mb-3 pb-3 text-center">
             <h4 class="fw-normal">Forgot password to <span class="fw-bold">SOUNDZcmr</span></h4>
         </div>
+        <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-        <form method="POST" action="{{ route('password.update') }}" class="form-custom mt-3">
+        <form method="post" action="{{ route('password.update') }}" class="form-custom mt-3">
             <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-4" :errors="$errors"/>
-
             @csrf
+        <!-- Password Reset Token -->
+            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
             <div class="mb-3">
                 <input type="email" name="email" value="{{old('email',$request->email)}}"
                        class="form-control"
@@ -31,8 +33,6 @@
             </div>
 
             <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
 
             <div class="text-center mt-3">
                 <button class="btn btn-sm btn-success w-100 rounded-pill" type="submit">Reset

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('link');
             $table->string('episode_number')->nullable();
             $table->boolean('is_voting_open')->default(1);
+            $table->string('hours')->nullable();
+            $table->timestamp('expiry_date')->nullable();
             $table->timestamps();
         });
     }

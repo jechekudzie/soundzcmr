@@ -177,6 +177,7 @@ return [
 
         KingFlamez\Rave\RaveServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
     ],
 
@@ -235,7 +236,7 @@ return [
 
         'Rave' => KingFlamez\Rave\Facades\Rave::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
-
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
     ],
 
 ];

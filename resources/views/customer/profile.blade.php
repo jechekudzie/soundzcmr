@@ -29,8 +29,8 @@
                                     <p class="text-secondary mb-1">{{$user->email}}</p>
                                     <p class="text-muted font-size-sm">@if($user->roles()){{$user->roles->first()->name}}@endif
                                     <p>
-                                        <button class="btn btn-primary">Follow</button>
-                                        <a href="{{url('/select_plan')}}" class="btn btn-outline-primary">Subscribe or
+                                        {{-- <button class="btn btn-primary">Follow</button>--}}
+                                        <a href="{{url('/select_plan')}}" class="btn btn-outline-success">Subscribe or
                                             upgrade</a>
                                 </div>
                             </div>
@@ -39,11 +39,17 @@
 
                 </div>
                 <div class="col-md-8">
+                    @if(Session::has('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>message! </strong> {{ Session::get('message')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
+                                    <h6 class="mb-0">Full Name </h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {{$user->name}}
@@ -73,7 +79,18 @@
                                     <h6 class="mb-0">Mobile</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{$user->phone_number}}
+                                    @if($user->nationality) {{$user->nationality->code}} @endif{{$user->phone_number}}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Country</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <p>
+                                        @if($user->nationality) {{$user->nationality->name}} @endif
+                                    </p>
                                 </div>
                             </div>
                             <hr>
@@ -82,19 +99,24 @@
                                     <h6 class="mb-0">Address</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{$user->name}}
+                                    {{$user->address}}
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a class="btn btn-info " target="__blank"
-                                       href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            data-bs-whatever="@mdo">Edit Profile
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                </div>
+                <div class="col-md-12">
                     <div class="row gutters-sm">
                         <div class="col-sm-12 mb-3">
                             <table id="example" class="display" style="width:100%">
@@ -105,6 +127,7 @@
                                     <th>Payment Method</th>
                                     <th>Reference</th>
                                     <th>Payment Status</th>
+                                    <th>Receipt</th>
                                     <th>Active</th>
                                 </tr>
                                 </thead>
@@ -112,16 +135,24 @@
                                 @foreach($user->subscriptions as $subscription)
                                     <tr>
                                         <td>{{$subscription->package->name}}</td>
-                                        <td> {{$subscription->amount_paid}}</td>
+                                        <td> {{number_format($subscription->amount_paid,2)}}</td>
                                         <td> {{$subscription->payment_type}}</td>
                                         <td>{{$subscription->reference}}</td>
                                         <td>{{$subscription->status}}</td>
+                                        <td>@if($subscription->status == 'succeeded')
+                                                <a href="{{$subscription->flutterwave_reference}}" target="_blank">Receipt</a>
+                                            @else
+                                                {{$subscriptions->flutterwave_reference}}
+                                            @endif
+                                        </td>
                                         <td>@if($subscription->is_active == 0)
                                                 {{'Expired'}}
                                             @else
                                                 {{'Active'}}
                                             @endif
                                         </td>
+
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -130,12 +161,84 @@
 
                     </div>
 
-
                 </div>
             </div>
 
         </div>
     </div>
+    <!-- Vertically centered modal -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="{{url('/profile/update/'.$user->id)}}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Name:</label>
+                                    <input type="text" name="name" value="{{$user->name}}" class="form-control"
+                                           id="recipient-name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Email:</label>
+                                    <input type="text" name="email" disabled value="{{$user->email}}"
+                                           class="form-control"
+                                           id="recipient-name">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Country:</label>
+                                    <select class="form-select" name="nationality_id"
+                                            aria-label="Default select example">
+                                        <option value="">Select</option>
+                                        @foreach($countries as $country)
+                                            <option
+                                                value="{{$country->id}}" @if($country->id == $user->nationality_id){{'selected'}}@endif>{{$country->name}}
+                                                ({{$country->code}})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Mobile Number:</label>
+                                    <input type="text" name="phone_number" value="{{$user->phone_number}}"
+                                           class="form-control"
+                                           id="recipient-name">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Physical Address:</label>
+                                <textarea class="form-control" name="physical_address"
+                                          id="message-text">{{$user->address}}</textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  <!-- Vertically centered scrollable modal -->
+
+
 @stop
 
 @push('scripts')

@@ -119,6 +119,7 @@
                                                     <th><a href="#">Payment Method</a></th>
                                                     <th><a href="#">Reference</a></th>
                                                     <th><a href="#">Payment Status</a></th>
+                                                    <th><a href="#">Receipt</a></th>
                                                     <th><a href="#">Active</a></th>
                                                 </tr>
                                                 </thead>
@@ -144,7 +145,13 @@
                                                         </td>
                                                         <td> {{$subscription->reference}}</td>
                                                         <td> {{$subscription->status}}</td>
-
+                                                        <td>
+                                                            @if($subscription->status == 'succeeded')
+                                                                <a href="{{$subscription->flutterwave_reference}}" target="_blank">Receipt</a>
+                                                            @else
+                                                                {{$subscription->flutterwave_reference}}
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             @if($subscription->is_active == 0)
                                                                 {{'Expired'}}

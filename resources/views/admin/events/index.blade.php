@@ -56,7 +56,8 @@
                                                             <button class="btn p-0" type="button"
                                                                     id="dropdownMenuButton2" data-bs-toggle="dropdown"
                                                                     aria-haspopup="true" aria-expanded="false">Episodes:
-                                                                <i class="icon-lg pb-3px" data-feather="more-horizontal"></i>
+                                                                <i class="icon-lg pb-3px"
+                                                                   data-feather="more-horizontal"></i>
                                                             </button>
                                                             <div class="dropdown-menu"
                                                                  aria-labelledby="dropdownMenuButton2">
@@ -66,7 +67,8 @@
                                                                            href="{{url('/admin/'.$episode->id.'/contestants')}}"><i
                                                                                 data-feather="meh"
                                                                                 class="icon-sm me-2"></i>
-                                                                            <span class="">Episode: {{$episode->episode_number}}</span></a>
+                                                                            <span
+                                                                                class="">Episode: {{$episode->episode_number}}</span></a>
                                                                     @endforeach
                                                                 @endif
 
@@ -74,25 +76,22 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="card-body">
-                                                    <p class="mb-3 tx-14">{!! substr($event->description,0,50) !!}</p>
-                                                    .....
+
                                                     @if($event->episodes)
-                                                        @if($event->episodes->count()>=1)
-                                                            <iframe style="width: 100%; height: 300px"
-                                                                    src="https://www.youtube.com/embed/{{substr($event->episodes->first()->link,17)}}"
-                                                                    title="{{asset($event->title)}}" frameborder="0"
-                                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                    allowfullscreen></iframe>
-                                                        @endif
-                                                    @else
                                                         <iframe style="width: 100%; height: 300px"
-                                                                src="https://www.youtube.com/embed/"
-                                                                title="{{asset($event->title)}}" frameborder="0"
+                                                                src="https://www.youtube.com/embed/{{substr($event->episodes->first()->link,17)}}"
+                                                                title="{{asset($episode->title)}}" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowfullscreen></iframe>
+                                                                allowfullscreen>
+
+                                                        </iframe>
                                                     @endif
+
                                                 </div>
+                                                <p class="mb-3 tx-14">{!! substr($event->description,0,50) !!}
+                                                    ...</p>
                                                 <div class="card-footer">
                                                     <div class="d-flex post-actions">
                                                         <a href="javascript:;"
@@ -115,7 +114,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     @endforeach
                                 </div>
 

@@ -17,7 +17,7 @@ class FlutterwaveController extends Controller
     {
 
         $user = Auth::user();
-        $plans = Package::whereNotIn('id', [1])->get();
+        $plans = Package::whereNotIn('id', [1,2])->get();
         return view('subscription.choose_plan', compact('user', 'plans'));
     }
 
@@ -47,7 +47,6 @@ class FlutterwaveController extends Controller
         } else {
             return view('subscription.check', compact('user', 'package'));
         }
-
 
     }
 

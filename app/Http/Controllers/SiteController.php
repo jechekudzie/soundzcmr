@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use App\Models\Event;
+use App\Models\Nationality;
 use App\Models\Package;
 use App\Models\Subscription;
 use App\Models\User;
@@ -19,12 +20,18 @@ class SiteController extends Controller
     public function index(Request $request)
     {
 
+
         $ip = \Request::getClientIp();
         $user = Auth::user();
         $currentUserInfo = Location::get($ip);
 
         $events = Event::latest()->take(6)->get();
         $package = Package::find(1);
+
+        if ($user->roles()->count() == 0) {
+            return redirect('/update_role');
+        }
+
         if ($user->is_subscribed == 0) {
 
             if ($currentUserInfo->countryName == 'Cameroon' && $currentUserInfo->countryCode == 'CM') {
@@ -59,10 +66,36 @@ class SiteController extends Controller
     {
         $user = Auth::user();
         $plans = Package::all();
+        $countries = Nationality::all();
         $roles = \Spatie\Permission\Models\Role::whereIn('id', [3, 4])->get();
 
         $current_plan = Subscription::where('user_id', $user->id)->where('is_active', 1)->first();
-        return view('customer.profile', compact('plans', 'user', 'roles', 'current_plan'));
+        return view('customer.profile', compact('plans', 'user', 'roles', 'current_plan', 'countries'));
+
+
+    }
+
+
+    public function profile_update(User $user)
+    {
+
+        $data = request()->validate([
+            'name' => 'required',
+            'phone_number' => 'required',
+            'nationality_id' => 'required',
+            'physical_address' => 'required',
+        ]);
+
+        $country = Nationality::find($data['nationality_id']);
+
+        $user->update([
+            'name' => $data['name'],
+            'phone_number' => $data['phone_number'],
+            'nationality_id' => $data['nationality_id'],
+            'address' => $data['physical_address'],
+        ]);
+
+        return back()->with('message', 'Update was successful.');
 
 
     }
@@ -103,6 +136,7 @@ class SiteController extends Controller
         return view('events.event_episode', compact('episode'));
 
     }
+
 
     public function has_active_subscriptions($user)
     {

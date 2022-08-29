@@ -96,7 +96,7 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="toast-body">
-                                    <a href="{{url('/events/'.$event->id)}}" class="btn btn-primary btn-block">Event Details</a>
+                                    <a href="{{url('/events/'.$event->id)}}" class="btn btn-success btn-block">Watch Now</a>
                                 </div>
                             </div>
                         </div>

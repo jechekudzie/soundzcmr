@@ -36,7 +36,7 @@
                                 <h4 class="my-0 fw-normal">{{$plan->name}}</h4>
                             </div>
                             <div class="card-body">
-                                <h1 class="card-title pricing-card-title">FCFA {{$plan->price}}<small
+                                <h1 class="card-title pricing-card-title">USD$ {{$plan->price}}<small
                                         class="text-muted fw-light"></small>
                                 </h1>
                                 <ul class="list-unstyled mt-3 mb-4">

@@ -75,9 +75,12 @@
                                         <div class="card rounded">
                                             <div class="card-body">
                                                 <h6 class="card-title">Add Participant To This Episode</h6>
+
+
                                                 <form method="post"
                                                       action="{{url('/admin/'.$episode->id.'/store_contestants')}}">
                                                     @csrf
+                                                    <input type="checkbox" onClick="toggle(this)" /> Select All<br/>
                                                     @if($event_participants)
                                                         @foreach($event_participants as $event_participant)
                                                             <div
@@ -92,17 +95,17 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <button class="btn btn-icon">
-                                                                    <label class="d-block" for="chk-ani">
-                                                                        <input name="event_participant_id[]"
-                                                                               value="{{$event_participant->id}}"
-                                                                               class="checkbox_animated" id="chk-ani"
-                                                                               type="checkbox">
-                                                                        Choose
-                                                                    </label>
-                                                                    <i data-feather="user-plus" data-bs-toggle="tooltip"
-                                                                       title="Connect"></i>
-                                                                </button>
+
+                                                                <label class="d-block" for="chk-ani">
+                                                                    <input name="event_participant_id[]"
+                                                                           value="{{$event_participant->id}}"
+                                                                           class="checkbox_animated" id="chk-ani"
+                                                                           type="checkbox">
+                                                                    Choose
+                                                                </label>
+                                                            {{--    <i data-feather="user-plus" data-bs-toggle="tooltip"
+                                                                   title="Connect"></i>--}}
+
                                                             </div>
 
                                                         @endforeach
@@ -213,6 +216,13 @@
 
             <script src="{{asset('backend/vendors/prismjs/prism.js')}}"></script>
             <script src="{{asset('backend/vendors/clipboard/clipboard.min.js')}}"></script>
-
+            <script type="text/javascript">
+                function toggle(source) {
+                    checkboxes = document.getElementsByName('event_participant_id[]');
+                    for(var i=0, n=checkboxes.length;i<n;i++) {
+                        checkboxes[i].checked = source.checked;
+                    }
+                }
+            </script>
     @endpush
 

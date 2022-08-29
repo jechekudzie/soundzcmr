@@ -26,4 +26,10 @@ class Episode extends Model
         return $this->hasMany(EpisodeRating::class);
     }
 
+
+    public function add_episode_participants($episode_participant)
+    {
+        return $this->episode_participants()->create($episode_participant);
+    }
+
 }

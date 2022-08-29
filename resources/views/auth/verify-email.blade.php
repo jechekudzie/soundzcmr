@@ -14,7 +14,7 @@
 
             <div class="text-center">
                 <h4>Verify Your Email</h4>
-                <p class="text-muted">
+                <p style="color: black;">
                     {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
 
                 </p>

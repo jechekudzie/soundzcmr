@@ -66,6 +66,7 @@ class EpisodesController extends Controller
         $event_participants = $episode->event->event_participants;
 
         return view('admin.episodes.show', compact('episode', 'event_participants'));
+
     }
 
     /**
@@ -76,26 +77,32 @@ class EpisodesController extends Controller
      */
     public function store_contestants(Episode $episode)
     {
-        //
+          request()->validate([
+            'event_participant_id.*'  => 'array|min:3|required',
+        ]);
         $event_participants = request('event_participant_id');
-        //dd($event_participants);
+
         $found = array();
+        $from = array();
 
         foreach ($event_participants as $event_participant_id) {
-            $episode_participant['event_participant_id'] = $event_participant_id;
-            $episode_participant['episode_id'] = $episode->id;
 
-            if ($participant = EpisodeParticipant::where('episode_id', $episode->id)->where('event_participant_id', $event_participant_id)->first()) {
-                $found [] = $participant->event_participant->name;
+            $episode_participant['event_participant_id'] = $event_participant_id;
+
+            $participant = EpisodeParticipant::where('episode_id', $episode->id)->where('event_participant_id', $event_participant_id)->first();
+            if ($participant == null) {
+
+                $episode->add_episode_participants($episode_participant);
+
             } else {
-                EpisodeParticipant::create($episode_participant);
+
+                $found [] = $participant->event_participant->name;
             }
 
         }
 
-
         if (!empty($found)) {
-            $message = 'Please note that the following participant were already added for this episode, so we did not add them: ' . implode(',',$found);
+            $message = 'Please note that the following participant were already added for this episode, so we did not add them: ' . implode(',', $found);
         } else {
             $message = 'Participants updated successfully';
         }
@@ -104,9 +111,39 @@ class EpisodesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit_episode(Episode $episode)
     {
         //
+
+        return view('admin.episodes.edit', compact('episode'));
+    }
+
+    public function update_episode(Episode $episode)
+    {
+        $hours = request('hours');
+        $episode_update = request()->validate([
+            'episode_number' => 'required',
+            'link' => 'required',
+        ]);
+
+        if($hours != null){
+            $duration = $hours / 24;
+            $expiry_date = Date('Y-m-d', strtotime('+' .$duration . ' days'));
+            $episode->update([
+                'episode_number' => $episode_update['episode_number'],
+                'link' => $episode_update['link'],
+                'expiry_date' => $expiry_date,
+                'hours' => $hours,
+            ]);
+        }else{
+            $episode->update([
+                'episode_number' => $episode_update['episode_number'],
+                'link' => $episode_update['link'],
+            ]);
+        }
+
+
+        return back()->with('message', 'Episode updated successfully');
     }
 
     /**

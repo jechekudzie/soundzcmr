@@ -32,6 +32,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(EpisodeParticipantLike::class);
     }
+
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

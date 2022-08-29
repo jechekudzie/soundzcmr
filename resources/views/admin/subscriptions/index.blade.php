@@ -53,6 +53,7 @@
                                         <th><a href="#">Payment Method</a></th>
                                         <th><a href="#">Reference</a></th>
                                         <th><a href="#">Payment Status</a></th>
+                                        <th><a href="#">Receipt</a></th>
                                         <th><a href="#">Active</a></th>
                                     </tr>
                                     </thead>
@@ -61,7 +62,7 @@
                                         @if($user->subscriptions->count() > 0)
                                                 <tr>
                                                     <td>{{$user->subscriptions->last()->user->email}} </td>
-                                                    <td>@if($user->roles()){{$user->roles->first()->name}}@endif </td>
+                                                    <td>@if($user->roles()){{$user->getRoleNames()->first()}}@endif </td>
                                                     <td>{{$user->subscriptions->last()->package->name}}</td>
                                                     <td> {{$user->subscriptions->last()->package_price}}</td>
                                                     <td>
@@ -74,6 +75,12 @@
                                                     <td> {{$user->subscriptions->last()->reference}}</td>
                                                     <td> {{$user->subscriptions->last()->status}}</td>
 
+                                                    <td>@if($user->subscriptions->last()->status == 'succeeded')
+                                                            <a href="{{$user->subscriptions->last()->flutterwave_reference}}" target="_blank">Receipt</a>
+                                                        @else
+                                                            {{$user->subscriptions->last()->flutterwave_reference}}
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         @if($user->subscriptions->last()->is_active == 0)
                                                             {{'Expired'}}

@@ -24,7 +24,7 @@
         <div class="form-password mb-3 auth-pass-inputgroup">
             <div class="position-relative">
                 <input type="password" name="password" class="form-control" id="password-input"
-                       placeholder="Enter password" value="{{old('email')}}">
+                       placeholder="Enter password" value="{{old('password')}}">
                 <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none"
                         id="password-addon">
                     <i class="mdi mdi-eye-outline f-16 text-muted"></i>
@@ -34,11 +34,10 @@
 
         <div class="form-password mb-3 auth-pass-inputgroup">
             <div class="position-relative">
-                <input type="password" name="password_confirmation" class="form-control"
-                       id="password-input"
-                       placeholder="Re-Enter password" value="{{old('email')}}">
+                <input type="password" name="password_confirmation" class="form-control" id="password-input1"
+                       placeholder="Re-Enter password" value="{{old('password')}}">
                 <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0 shadow-none"
-                        id="password-addon">
+                        id="password-addon1">
                     <i class="mdi mdi-eye-outline f-16 text-muted"></i>
                 </button>
             </div>

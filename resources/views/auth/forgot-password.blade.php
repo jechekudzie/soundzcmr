@@ -11,12 +11,12 @@
         <div class="alert alert-success text-center rounded-pill mb-4" role="alert">
             Instructions to reset will be sent to your registered email.
         </div>
-        <form method="POST" action="{{ route('password.reset') }}" class="form-custom mt-3">
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')"/>
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')"/>
 
-            <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+        <form method="POST" action="{{ route('password.email') }}" class="form-custom mt-3">
             @csrf
             <div class="mb-3">
                 <input type="text" name="email" class="form-control" id="username"
@@ -28,6 +28,7 @@
                     {{ __(' Send Reset Link') }}</button>
 
             </div>
+
         </form>
 
         <hr/>

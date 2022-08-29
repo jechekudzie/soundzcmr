@@ -86,7 +86,8 @@
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
                                                             <div class="ms-2">
-                                                                <p style="font-weight: bold;font-size: 20px;">Episode: {{$episode->episode_number}}</p>
+                                                                <p style="font-weight: bold;font-size: 20px;">
+                                                                    Episode: {{$episode->episode_number}}</p>
                                                                 <p class="tx-11 text-muted">{{date('d F M',strtotime($event->date))}}</p>
                                                             </div>
                                                         </div>
@@ -101,20 +102,22 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <div class="d-flex post-actions">
-                                                        <a href="javascript:;"
-                                                           class="d-flex align-items-center text-muted me-4">
-                                                            <i class="icon-md" data-feather="heart"></i>
-                                                            <p class="d-none d-md-block ms-2">Like</p>
-                                                        </a>
-                                                       {{-- <a href="javascript:;"
-                                                           class="d-flex align-items-center text-muted me-4">
-                                                            <i class="icon-md" data-feather="message-square"></i>
-                                                            <p class="d-none d-md-block ms-2">Comment</p>
-                                                        </a>--}}
+                                                        {{-- <a href="javascript:;"
+                                                            class="d-flex align-items-center text-muted me-4">
+                                                             <i class="icon-md" data-feather="message-square"></i>
+                                                             <p class="d-none d-md-block ms-2">Comment</p>
+                                                         </a>--}}
                                                         <a href="{{url('/admin/'.$episode->id.'/contestants')}}"
                                                            class="d-flex align-items-center text-muted">
                                                             <i class="icon-md" data-feather="users"></i>
                                                             <p class="d-none d-md-block ms-2">Episode Participants</p>
+                                                        </a>
+
+                                                        <a style="margin: 10px;" href="{{url('/admin/'.$episode->id.'/episode/edit')}}"
+                                                           class="d-flex align-items-center text-muted">
+                                                            <i class="icon-md" data-feather="edit"></i>
+                                                            <p class="d-none d-md-block ms-2"> Edit</p>
+
                                                         </a>
 
                                                     </div>
@@ -152,7 +155,8 @@
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="colFormLabel" class="form-label">Episode number</label>
-                                                <input name="episode_number" type="number" step="any" class="form-control" id="colFormLabel">
+                                                <input name="episode_number" type="number" step="any"
+                                                       class="form-control" id="colFormLabel">
                                             </div>
 
                                             <div class="col-md-6 mb-3">

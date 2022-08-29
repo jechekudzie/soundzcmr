@@ -29,10 +29,10 @@
                                 <h6 class="my-0">Subscription plan</h6>
                                 <small class="text-muted">{{$package->name}}</small>
                             </div>
-                            <span class="text-muted">FCFA {{$package->price}}</span>
+                            <span class="text-muted">USD$ {{$package->price}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (FCFA)</span>
+                            <span>Total (USD$)</span>
                             <strong>{{$package->price}}</strong>
                         </li>
                     </ul>
@@ -49,17 +49,16 @@
                     @if($errors->any())
                         @include('errors')
                     @endif
-                    @if (session('message'))
-                        <div
-                            style="color: white" class="alert alert-success alert-rounded col-md-6"><i
-                                class="fa fa-check-circle"></i> {{ session('message') }}
+                    @if(Session::has('message'))
+                        <div class="alert alert-success alert-rounded col-md-6"><i
+                                class="fa fa-check-circle"></i> {{Session::get('message')}}
                             <button type="button" class="close" data-dismiss="alert"
                                     aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
                         </div>
                     @endif
-                    <form class="needs-validation" action="{{ route('pay') }}" method="post"
-                          enctype="multipart/form-data" novalidate>
+                    <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
+                    <form  action="{{route('stripe.create')}}" class="require-validation" method="post">
                         @csrf
                         <div class="row g-3">
                             <div class="col-sm-6">
@@ -73,19 +72,45 @@
 
                             <div class="col-sm-6">
                                 <label for="email" class="form-label">Email <span class="text-muted"></span></label>
-                                <input type="email" name="email" class="form-control" id="email" value="{{$user->email}}">
+                                <input type="email" name="email" class="form-control" id="email"
+                                       value="{{$user->email}}">
                                 <div class="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
                             </div>
 
-                            <div class="col-sm-8">
-                                <label for="address" class="form-label">Mobile number</label>
-                                <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="enter valid  phone including country code"
-                                       required>
-                                <div class="invalid-feedback">
-                                    Please enter your mobile number.
-                                </div>
+
+                            <div class="col-sm-6">
+                                <label for="email" class="form-label">Name on card <span
+                                        class="text-muted"></span></label>
+                                <input type="text" name="card_name"  class="form-control "
+                                       id="email">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="email" class="form-label">Card Number <span
+                                        class="text-muted"></span></label>
+                                <input type="text" name="number" class="form-control card-number"
+                                       size='20'>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="email" class="form-label">Expiry Month <span
+                                        class="text-muted"></span></label>
+                                <input type="text" name="exp_month"  class="form-control card-expiry-month"
+                                       placeholder='MM' >
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="email" class="form-label">Expiry Year <span
+                                        class="text-muted"></span></label>
+                                <input type="text" name="exp_year"  class="form-control card-expiry-year"
+                                       placeholder='YYYY'>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="email" class="form-label">CVV <span class="text-muted"></span></label>
+                                <input type="text" name="cvc" class="form-control card-cvc">
                             </div>
 
                             <input type="hidden" name="package_id" value="{{$package->id}}">
@@ -102,4 +127,6 @@
             </div>
         </main>
     </div>
+
 @stop
+

@@ -36,7 +36,7 @@
 
    {{-- <img style="width: 200px;" src="{{asset('mail.png')}}">--}}
 </div>
-<div style="background: url('{{asset('bg.png')}}') no-repeat center center;
+<div style="background: url('{{asset('bg.JPG')}}') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

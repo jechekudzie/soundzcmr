@@ -104,9 +104,13 @@
                                                         <p class="tx-11 text-muted">{{$event_participant->participant_id}}</p>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-icon">
-                                                   <i data-feather="pencil" data-bs-toggle="tooltip" title="Connect"></i>
-                                                </button>
+                                                <a href="{{url('/admin/'.$event_participant->id.'/contestant/edit')}}" class="btn btn-icon">
+                                                   <i data-feather="edit" data-bs-toggle="tooltip" title="Connect"></i>
+                                                </a>
+
+                                                <a href="{{url('/admin/'.$event_participant->id.'/contestant/show')}}" class="btn btn-icon">
+                                                    <i data-feather="trash" data-bs-toggle="tooltip" title="Connect"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     @endforeach

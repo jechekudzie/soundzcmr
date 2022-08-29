@@ -15,6 +15,18 @@ document.getElementById('password-addon').addEventListener('click', function () 
 	}
 });
 
+
+
+document.getElementById('password-addon1').addEventListener('click', function () {
+    var passwordInput = document.getElementById("password-input1");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+});
+
+
 // two-step move next
 function moveToNext(elem, count) {
     if (elem.value.length > 0) {

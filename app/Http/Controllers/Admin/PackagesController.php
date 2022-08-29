@@ -15,7 +15,7 @@ class PackagesController extends Controller
     public function index()
     {
         //
-        $packages = Package::all();
+        $packages = Package::whereNotIn('id', [2])->get();
         $items = Item::all();
         return view('admin.packages.index', compact('packages','items'));
 
@@ -54,14 +54,14 @@ class PackagesController extends Controller
         //now save data in the table
         $plan = Package::create($package);
 
-        $items = request('items');
+        /*$items = request('items');
         if ($items) {
             foreach ($items as $item) {
                 $plan_items['package_id'] = $plan->id;
                 $plan_items['item_id'] = $item;
                 PackageItem::create($plan_items);
             }
-        }
+        }*/
         return back()->with('message','Plan added successfully');
     }
 
